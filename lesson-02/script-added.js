@@ -14,11 +14,15 @@ for (let i=0; i<symbols.length; i++){
 console.log('Результат: ', result);              // результат
 
 
-const a = result;
-for (let i=1; i<3; i++){
-    result = a * result;
-}
+// const a = result;
+// for (let i=1; i<3; i++){
+//     result = a * result;
+// }
+// console.log('Результат в степени: ', result);
+
+result = result**3;                              // возведение в степень 3 - основание**степень
 console.log('Результат в степени: ', result);
+
 
 let sliceStr = result.toString();
 sliceStr = sliceStr.slice(0,2);
