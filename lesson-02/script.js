@@ -19,7 +19,7 @@ console.log("Цель заработать " + mission + " рублей");
 budgetDay = money/30;
 console.log('budgetDay: ', budgetDay);
 console.log('остаток от деления: ', money % 30);
-let modulo = (money % 30) > 0 ? "Да, остаток есть" : "Нет, остатка нет";
+modulo = (money % 30) > 0 ? "Да, остаток есть" : "Нет, остатка нет";
 console.log('modulo: ', modulo);
 
 let str = addExpenses.toLowerCase();
