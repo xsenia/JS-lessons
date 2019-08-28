@@ -14,9 +14,9 @@ let money,
 
 money = +prompt('Ваш месячный доход, руб?',5000);
 
-// costs = prompt('Перечислите возможные расходы за рассчитываемый период, через запятую');
+costs = prompt('Перечислите возможные расходы за рассчитываемый период, через запятую');
 
-// deposit = confirm('Есть ли у вас депозит в банке?');
+deposit = confirm('Есть ли у вас депозит в банке?');
 
 // console.log(typeof money);
 // console.log(typeof costs);
@@ -89,6 +89,27 @@ console.log('Сумма всех доходов за месяц - ', money);
 console.log('Сумма всех расходов за месяц - ', expensesMonth);
 console.log('Накопления за месяц - ', accumulatedMonth);
 console.log('Нужную сумму вы накопите через - ' + targetMonth + ' месяцев');
+
+let getStatusIncome = function () {
+    if (budgetDay > 800) {
+        return('Высокий уровень дохода');
+    } else if (budgetDay > 300 && budgetDay <=800) {
+        return('Средний уровень дохода');
+    } else if (budgetDay > 0 && budgetDay <= 300) {
+        return('Низкий уровень дохода');
+    } else {
+        return('Что то пошло не так');
+    }
+};
+console.log(getStatusIncome());
+
+let showTypeof = function(data) {
+    console.log(data, typeof(data));
+};
+
+showTypeof(money);
+showTypeof(deposit);
+showTypeof(costs);
  
 
 
