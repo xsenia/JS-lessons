@@ -11,8 +11,13 @@ start();
 let appData = {
     budget: money,
     income: {},
-    addIncome: [],
-    expenses: {},
+    addIncome: [], 
+    question1: 0, 
+    question2: 0,
+    expenses: {
+        'Введите обязательную статью расходов': appData.question1,
+        'Во сколько это обойдется?': appData.question2
+    },
     addExpenses: [],
     deposit: false,
     mission: 50000,
@@ -22,28 +27,31 @@ let appData = {
     expensesMonth: 0,
     asking: function() {
         let addExpenses = prompt('Перечислите возможные доходы через запятую');
+
         appData.addExpenses = addExpenses.toLowerCase().split(',');
         appData.deposit = confirm('У вас есть депозит?');
+
+        // for(let i = 0; i < 2; i++) {
+    
+        //     if(i===0) {
+        //         prompt('Введите обязательную статью расходов','Квартплата');
+        //         do{
+        //             appData.question1 = prompt('Во сколько это обойдется?',1000); 
+        //         } while(isNaN(appData.question1) || appData.question1 === '' || appData.question1 === null);
+        //     } else {
+        //         prompt('Введите обязательную статью расходов','Бензин');
+        //         do{
+        //             appData.question2 = prompt('Во сколько это обойдется?',1000); 
+        //         } while(isNaN(appData.question2) || appData.question2 === '' || appData.question2 === null);
+        //     } 
+           
+        // } 
     },
     getExpensesMonth: function() {
-        let expenses1, expenses2, sum = 0, question;
-    
-        for(let i = 0; i < 2; i++) {
-    
-            if(i===0) {
-                expenses1 = prompt('Введите обязательную статью расходов','Квартплата');
-            } else {
-                expenses2 = prompt('Введите обязательную статью расходов','Бензин');
-            }
-    
-            do{
-                question = prompt('Во сколько это обойдется?',1000); 
-            } while(isNaN(question) || question === '' || question === null);
-    
-            sum += +question;
-        } 
+        // let sum = 0, question;   
         
-        return sum;    
+        // sum += +question;
+        // return sum;    
     },
     getAccumulatedMonth: function() {
         return money - expensesMonth;
@@ -66,9 +74,9 @@ let appData = {
 };
 
 
-let expensesMonth = appData.getExpensesMonth();
+//let expensesMonth = appData.getExpensesMonth();
 
-console.log('Расходы за месяц: ', expensesMonth);
+//console.log('Расходы за месяц: ', expensesMonth);
 
 
 
