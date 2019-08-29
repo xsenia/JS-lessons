@@ -8,7 +8,7 @@ let money,
     quest2,
     request2,
     budgetMonth,
-    budgetDay = -1,
+    budgetDay,
     mission,
     times;
 
@@ -75,7 +75,11 @@ console.log('Сумма всех доходов за месяц - ', money);
 console.log('Сумма всех расходов за месяц - ', expensesMonth);
 console.log('Накопления за месяц - ', accumulatedMonth);
 console.log('Нужную сумму вы накопите через - ' + targetMonth + ' месяцев');
- 
+
+
+budgetDay = Math.ceil(accumulatedMonth/30);
+console.log('budgetDay: ', budgetDay);
+
 let getStatusIncome = function () {
     if (budgetDay > 800) {
         return('Высокий уровень дохода');
