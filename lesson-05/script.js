@@ -8,36 +8,26 @@ let money,
     quest2,
     request2,
     budgetMonth,
-    budgetDay,
+    budgetDay = -1,
     mission,
     times;
 
 
-
-let start = function() {
-    // money = prompt('Ваш месячный доход, руб?*',50000);
-    // while(isNaN(money) || money === '' || money === null) {
-    //     money = prompt('Ваш месячный доход, руб?**',50000);
-    // }
-
+let start = function() {   
     do {
         money = prompt('Ваш месячный доход, руб?*',50000);
     } while (isNaN(money) || money === '' || money === null);
-
 }
-
-
-
 start();
-
-
 
 mission = +prompt('Сколько хотите накопить, руб?',100000);
 
 
+// ---Расчет расходов за месяц---
 const getExpensesMonth = function() {
 
-    let sum = 0;
+    let sum = 0,  //сумма расходов
+        cost = 0; //статья расхода
 
     for(let i = 0; i < 2; i++) {
 
@@ -48,25 +38,29 @@ const getExpensesMonth = function() {
             request1 = prompt('Введите обязательную статью расходов','Бензин');
         }
 
-        do {
-            sum += Number(prompt('Сколько на это потребуется?',1000));
-        } while(isNaN(sum) || sum === '' || sum === null)        
+        cost = prompt('Сколько на это потребуется?',1000);
+
+        while(isNaN(cost) || cost === '' || cost === null)  {
+            sum = prompt('Сколько на это потребуется?*',1000);            
+        }    
+
+        cost =  Number(cost);
+        sum += cost;
 
     } 
-    console.log('getExpensesMonth: ', sum);
+    
     return sum;
     
 }
 
 
-
-const  getAccumulatedMonth = function(a,b) {
-    let budgetMonth = a - b;
+const  getAccumulatedMonth = function(money, expensesMonth) {
+    let budgetMonth = money - expensesMonth;
     return budgetMonth;
 }
 
-const getTargetMonth = function(a,b) {
-    let targetMonth = Math.ceil(a/b);
+const getTargetMonth = function(mission, accumulatedMonth) {
+    let targetMonth = Math.ceil(mission/accumulatedMonth);
     if(targetMonth < 0){
         return targetMonth = 'Цель не будет достигнута';
     }
