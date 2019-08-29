@@ -41,7 +41,7 @@ const getExpensesMonth = function() {
         cost = prompt('Сколько на это потребуется?',1000);
 
         while(isNaN(cost) || cost === '' || cost === null)  {
-            sum = prompt('Сколько на это потребуется?*',1000);            
+            cost = prompt('Сколько на это потребуется?*',1000);            
         }    
 
         cost =  Number(cost);
