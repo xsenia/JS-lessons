@@ -14,10 +14,7 @@ let appData = {
     addIncome: [], 
     question1: 0, 
     question2: 0,
-    expenses: {
-        'Введите обязательную статью расходов': appData.question1,
-        'Во сколько это обойдется?': appData.question2
-    },
+    expenses: {},
     addExpenses: [],
     deposit: false,
     mission: 50000,
@@ -31,27 +28,21 @@ let appData = {
         appData.addExpenses = addExpenses.toLowerCase().split(',');
         appData.deposit = confirm('У вас есть депозит?');
 
-        // for(let i = 0; i < 2; i++) {
-    
-        //     if(i===0) {
-        //         prompt('Введите обязательную статью расходов','Квартплата');
-        //         do{
-        //             appData.question1 = prompt('Во сколько это обойдется?',1000); 
-        //         } while(isNaN(appData.question1) || appData.question1 === '' || appData.question1 === null);
-        //     } else {
-        //         prompt('Введите обязательную статью расходов','Бензин');
-        //         do{
-        //             appData.question2 = prompt('Во сколько это обойдется?',1000); 
-        //         } while(isNaN(appData.question2) || appData.question2 === '' || appData.question2 === null);
-        //     } 
-           
-        // } 
+        for(let i = 0; i < 2; i++) {
+            let requiredExpenses = prompt('Введите обязательную статью расходов','Квартплата');
+            let requiredAnswer;
+            do{
+                requiredAnswer = prompt('Во сколько это обойдется?',1000); 
+            } while (isNaN(requiredAnswer) || requiredAnswer === '' || requiredAnswer === null);
+
+            appData.expenses[requiredExpenses] = requiredAnswer;
+        }
+
     },
     getExpensesMonth: function() {
-        // let sum = 0, question;   
-        
-        // sum += +question;
-        // return sum;    
+        for (let key in appData.expenses) {
+            appData.expensesMonth += +appData.expenses[key];
+        }    
     },
     getAccumulatedMonth: function() {
         return money - expensesMonth;
@@ -73,10 +64,14 @@ let appData = {
     }
 };
 
+appData.asking();
+appData.getExpensesMonth();
+//appData.getBudget();
 
-//let expensesMonth = appData.getExpensesMonth();
 
-//console.log('Расходы за месяц: ', expensesMonth);
+let expensesMonth = appData.getExpensesMonth();
+
+console.log('Расходы за месяц: ', appData.expensesMonth);
 
 
 
@@ -90,4 +85,8 @@ if(appData.getTargetMonth()>0){
 }
 
 console.log(appData.getStatusIncome());
+
+for(let key in appData) {
+    console.log('Данные программы: ' + key + ' - ' + appData[key]);
+}
 
