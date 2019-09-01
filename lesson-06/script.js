@@ -24,19 +24,21 @@ let appData = {
     expensesMonth: 0,
     asking: function() {
         let addExpenses = prompt('Перечислите возможные доходы через запятую');
-
         appData.addExpenses = addExpenses.toLowerCase().split(',');
+
         appData.deposit = confirm('У вас есть депозит?');
 
         for(let i = 0; i < 2; i++) {
-            let requiredExpenses = prompt('Введите обязательную статью расходов','Квартплата');
+            let requiredExpenses = prompt('Введите обязательную статью расходов', 'трата №' + (i+1));
             let requiredAnswer;
             do{
                 requiredAnswer = prompt('Во сколько это обойдется?',1000); 
-            } while (isNaN(requiredAnswer) || requiredAnswer === '' || requiredAnswer === null);
+            } while (isNaN(requiredAnswer) || requiredAnswer === '' || requiredAnswer === null);            
 
             appData.expenses[requiredExpenses] = requiredAnswer;
         }
+        
+        console.log('appData.expenses: ', appData.expenses);
 
     },
     getExpensesMonth: function() {
@@ -44,14 +46,14 @@ let appData = {
             appData.expensesMonth += +appData.expenses[key];
         }    
     },
-    getAccumulatedMonth: function() {
-        return money - expensesMonth;
+    getBudget: function() {
+        appData.budgetMonth = appData.budget - appData.expensesMonth;
+        appData.budgetDay = Math.ceil(appData.budgetMonth/30);
     },
     getTargetMonth: function() {    
         return appData.mission/appData.getAccumulatedMonth;
     },
     getStatusIncome: function () {
-        appData.budgetDay = Math.ceil(appData.getAccumulatedMonth/30);
         if (appData.budgetDay > 800) {
             return('Высокий уровень дохода');
         } else if (appData.budgetDay > 300 && appData.budgetDay <=800) {
@@ -66,16 +68,9 @@ let appData = {
 
 appData.asking();
 appData.getExpensesMonth();
-//appData.getBudget();
-
-
-let expensesMonth = appData.getExpensesMonth();
+appData.getBudget();
 
 console.log('Расходы за месяц: ', appData.expensesMonth);
-
-
-
-//appData.budgetDay = Math.ceil(appData.getAccumulatedMonth/30);
 
 
 if(appData.getTargetMonth()>0){
@@ -84,6 +79,7 @@ if(appData.getTargetMonth()>0){
     console.log('Цель не будет достигнута');
 }
 
+//выведет уровень дохода
 console.log(appData.getStatusIncome());
 
 for(let key in appData) {
