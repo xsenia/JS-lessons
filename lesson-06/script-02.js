@@ -9,7 +9,7 @@ console.log('now: ', now);
 
 for (let i=0; i<week.length; i++) {
 
-    let elemId = i - 1;
+    let elemId = i + 1;
 
     if (i<5) {
         container.innerHTML += '<p id="day' + elemId + '">' + week[i] + '</p>';
