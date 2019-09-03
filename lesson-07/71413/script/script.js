@@ -1,35 +1,31 @@
 'use strict';
 
-let btn = document.getElementById('start');
+let btnStart =                  document.getElementById('start');
+let salaryAmount =              document.querySelector('.salary-amount');
+let incomeTitle =               document.querySelector('.income-title');
+let incomeAmount =              document.querySelector('.income-amount');
+let additionalIncomeItems =     document.querySelectorAll('.additional_income-item');
+let additionalIncomeItem1 =     additionalIncomeItems[0];
+let additionalIncomeItem2 =     additionalIncomeItems[1];
+let arrPlus =                   document.querySelectorAll('.btn_plus');
+let incomePlus =                arrPlus[0];
+let expensePlus =               arrPlus[1];
+let additionalIncomeTitle =     document.querySelector('.additional_income-title');
+let additionalIncomeItem =      document.querySelectorAll('.additional_income-item');
+let expensesTitle =             document.querySelector('.expenses-title');
+let expensesAmount =            document.querySelector('.expenses-amount');
+let additionalExpensesItemd =   document.querySelector('.additional_expenses-item');
+let depositCheck =              document.querySelector('#deposit-check');
+let depositAmount =             document.querySelector('.deposit-amount');
+let depositPercent =            document.querySelector('.deposit-percent');
+let targetAmount =              document.querySelector('.target-amount');
+let periodSelect =              document.querySelector('.period-select');
+let budgetMonthValue =          document.querySelector('.budget_month-value');
+let budgetDayValue =            document.querySelector('.budget_day-value');
+let expensesMonthValue =        document.querySelector('.expenses_month-value');
+let additionalIncomeValue =     document.querySelector('.additional_income-value');
+let additionalExpensesValue =   document.querySelector('.additional_expenses-value');
+let incomePeriodValue =         document.querySelector('.income_period-value');
+let targetMonthValue =          document.querySelector('.target_month-value');
 
-let arrPlus = document.querySelectorAll('.btn_plus');
-
-let incomeAdd = arrPlus[0];
-let expensesAdd = arrPlus[1];
-
-let check = document.querySelector('#deposit-check');
-
-let inputAdd = document.querySelectorAll('.additional_income-item');
-
-let inputResult = document.querySelectorAll('.result input');
-
-let inputData = document.querySelectorAll('.data input');
-console.log(inputData);
-
-let salaryAmount            =  inputData[0];
-let incomeTitle             =  inputData[1];
-let incomeAmount            =  inputData[2];
-let additionalIncomeItem    =  inputData[3];
-let additionalIncomeItem2   =  inputData[4];
-let expensesTitle           =  inputData[5];
-let expensesAmount          =  inputData[6];
-let additionalExpensesItemd =  inputData[7];
-let depositAmount           =  inputData[9];
-let depositPercent          =  inputData[10];
-let targetAmount            =  inputData[11];
-let periodSelect            =  inputData[12];
-
-// console.log(salaryAmount,incomeTitle,incomeAmount,additionalIncomeItem,additionalIncomeItem2,expensesTitle,
-//   expensesAmount,additionalExpensesItemd,depositAmount,depositPercent,targetAmount,periodSelect );
-
-
+console.log(btnStart, salaryAmount, incomeTitle, incomeAmount, additionalIncomeItems, additionalIncomeItem1, additionalIncomeItem1, arrPlus, incomePlus, expensePlus, additionalIncomeTitle, additionalIncomeItem, expensesTitle, expensesAmount, additionalExpensesItemd, depositCheck, depositAmount, depositPercent, targetAmount, periodSelect, budgetMonthValue, budgetDayValue, expensesMonthValue, additionalIncomeValue, additionalExpensesValue,incomePeriodValue, targetMonthValue);
