@@ -29,6 +29,13 @@ let periodAmount =              document.querySelector('.period-amount');
 let periodSelect =              document.querySelector('.period-select');
 let dataInputs =                document.querySelectorAll('.data input[type=text]');
 
+btnStart.setAttribute('disabled',true);
+salaryAmount.addEventListener('input', function(){
+    if(salaryAmount.value !== '' && !isNaN(salaryAmount.value)) {
+        btnStart.removeAttribute('disabled');
+    }
+});
+
 
 let appData = {
     budget: 0,
@@ -47,12 +54,12 @@ let appData = {
     expensesMonth: 0,
     start: function() { 
 
-        if(salaryAmount.value === null || salaryAmount.value === '' || isNaN(salaryAmount) ) {            
-            btnStart.addEventListener('mousemove',function(event) {
-                btnStart.setAttribute('disabled', true);
-                //event.preventDefault();
-            });
-        }
+        // if(salaryAmount.value === null || salaryAmount.value === '' || isNaN(salaryAmount) ) {            
+        //     btnStart.addEventListener('mousemove',function(event) {
+        //         btnStart.setAttribute('disabled', true);
+        //         //event.preventDefault();
+        //     });
+        // }
 
         appData.budget = +salaryAmount.value;
 
@@ -143,6 +150,7 @@ let appData = {
     setPeriod: function() {
         let periodValue = periodSelect.value;
         periodAmount.innerHTML = periodValue;
+        incomePeriodValue.value = periodValue*appData.budgetMonth;
         return periodValue;
     },
     getExpensesMonth: function() {
@@ -186,7 +194,10 @@ let appData = {
     }
 };
 
-start.addEventListener('click', appData.start);
+start.addEventListener('click', () => {
+    appData.start();
+    appData.getResult();
+});
 
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 incomePlus.addEventListener('click', appData.addIncomeBlock);
