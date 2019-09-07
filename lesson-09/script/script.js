@@ -29,14 +29,6 @@ let periodAmount =              document.querySelector('.period-amount');
 let periodSelect =              document.querySelector('.period-select');
 let dataInputs =                document.querySelectorAll('.data input[type=text]');
 
-btnStart.setAttribute('disabled',true);
-salaryAmount.addEventListener('input', function(){
-    if(salaryAmount.value !== '' && !isNaN(salaryAmount.value)) {
-        btnStart.removeAttribute('disabled');
-    }
-});
-
-
 let appData = {
     budget: 0,
     income: {},
@@ -52,7 +44,26 @@ let appData = {
     budgetDay: 0, 
     budgetMonth: 0, 
     expensesMonth: 0,
-    startFoo: function() { 
+    enabled: function() {
+        if (salaryAmount.value !== '') {
+            btnStart.removeAttribute('disabled');
+        }
+    },
+    start: function() { 
+
+        if (salaryAmount.value === '') {
+            btnStart.setAttribute('disabled',true);
+        }
+
+        dataInputs.forEach(function(item){
+            item.setAttribute('disabled', true);
+        });
+        arrPlus.forEach(function(item){
+            item.setAttribute('disabled', true);
+        });
+        btnStart.style.display = 'none';
+        btnCncel.style.display = 'block';
+
         
         this.budget = +salaryAmount.value;
 
@@ -61,11 +72,54 @@ let appData = {
         this.getExpensesMonth();        
         this.getAddExpenses();
         this.getAddIncome();        
-        this.getBudget();        
-
+        this.getBudget();
         this.showResult();
+    },
+    reset: function() {
+        let dataInputs = document.querySelectorAll('.data input[type = text]'),
+            resultInputs = document.querySelectorAll('.result input[type = text]');
 
-        this.getResult();
+        dataInputs.forEach(function(item){
+            item.value = '';            
+            item.removeAttribute('disabled');           
+        });
+        resultInputs.forEach(function(item){
+            item.value = '';            
+        });
+        arrPlus.forEach(function(item){
+            item.removeAttribute('disabled');
+        });
+
+        let periodValue = periodSelect.value;
+        periodValue = 0;
+        periodAmount.innerHTML = periodValue;
+
+        for(let i=1; i<incomeItems.length; i++) {
+            incomeItems[i].parentNode.removeChild(incomeItems[i]);
+            incomePlus.style.display = 'block';
+        }
+        for(let i=1; i<expensesItems.length; i++) {
+            expensesItems[i].parentNode.removeChild(expensesItems[i]);
+            expensesPlus.style.display = 'block';
+        }
+
+        this.budget = 0;
+        this.income = {};
+        this.incomeMonth = 0; 
+        this.addIncome = []; 
+        this.question1 = 0; 
+        this.question2 = 0;
+        this.expenses = {};
+        this.addExpenses = [];
+        this.deposit = false;
+        this.persentDeposite = 0;
+        this.moneyDeposite = 0;
+        this.budgetDay = 0; 
+        this.budgetMonth = 0; 
+        this.expensesMonth = 0;
+
+        btnCncel.style.display = 'none';
+        btnStart.style.display = 'block';
     },
     showResult: function() {
         budgetMonthValue.value = this.budgetMonth;
@@ -75,15 +129,7 @@ let appData = {
         additionalIncomeValue.value = this.addIncome.join(', ');
         targetMonthValue.value = Math.ceil(this.getTargetMonth());
         incomePeriodValue.value = this.calcPeriod();
-    },
-    getResult: function() {        
-        dataInputs.forEach(function(item){
-            item.setAttribute('disabled', true);
-        });
-        btnStart.style.display = 'none';
-        btnCncel.style.display = 'block';
-
-    },
+    },    
     addExpensesBlock: function() {        
         let cloneExpensesItems = expensesItems[0].cloneNode(true);
         expensesItems[0].parentNode.insertBefore(cloneExpensesItems, expensesPlus);
@@ -187,25 +233,14 @@ let appData = {
     }
 };
 
-btnStart.addEventListener('click', () => {
-      
-    appData.startFoo();
-    appData.getResult();
-});
-
-btnCncel.addEventListener('click', () => {
-    console.log('отмена');
-    dataInputs.forEach(function(item){
-        item.removeAttribute('disabled');
-        item.setAttribute('value', 0); //убрать
-    });
-});
-
+btnStart.addEventListener('click', appData.start.bind(appData));
+btnCncel.addEventListener('click', appData.reset.bind(appData));
 
 
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 incomePlus.addEventListener('click', appData.addIncomeBlock);
 periodSelect.addEventListener('change', appData.setPeriod);
+salaryAmount.addEventListener('keyup', appData.enabled)
 
 
 // if(appData.getTargetMonth()>0){
