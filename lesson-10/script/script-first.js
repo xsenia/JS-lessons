@@ -28,7 +28,7 @@ DomElement.prototype.createTag = function() {
 DomElement.prototype.createDiv = function() {
     let div = document.createElement('div');
     div.className = this.selector.slice(1);
-    div.innerHTML = this.selector.slice(1) + ' <b>Был создан див.</b> Нестандартный подход тормозит потребительский нишевый проект. Восприятие марки, конечно, оправдывает побочный PR-эффект, полагаясь на инсайдерскую информацию.';
+    div.innerHTML = this.selector.slice(1) + ' <b>Был создан див.</b>';
     document.body.append(div);
     div.style.height = this.height;
     div.style.width = this.width;
@@ -39,22 +39,15 @@ DomElement.prototype.createDiv = function() {
 
 DomElement.prototype.createP = function() {
     let paragraf = document.createElement('p');
-    paragraf.innerHTML = this.selector.slice(1) + ' <b>Был создан параграф.</b>  Нестандартный подход тормозит потребительский нишевый проект. Восприятие марки, конечно, оправдывает побочный PR-эффект, полагаясь на инсайдерскую информацию.';
+    paragraf.innerHTML = this.selector.slice(1) + ' <b>Был создан параграф.</b>';
     document.body.append(paragraf);
     paragraf.style.cssText='height:' + this.height + 'px;background-color: ' + this.bg +';width:' + this.width + 'px;font-size:'+ this.fontSize +'px;';
 };
 
 
-btn.addEventListener('click', () => {
+let newElement = prompt('Введите селектор, начинающийся с "." или с "#"');
+let domElement = new DomElement(newElement, 400, 400, 'silver', 24);
+let domElement2 = new DomElement(newElement, 400, 400, 'red', 24);
 
-    let selector = document.getElementById('selector').value,
-        height =  document.getElementById('height').value,
-        width =  document.getElementById('width').value,
-        bg =  document.getElementById('bg').value,
-        fontSize =  document.getElementById('fontSize').value;
-
-    let domElement = new DomElement(selector, height, width, bg, fontSize); 
-
-    domElement.createTag(selector, height, width, bg, fontSize);
-});
-
+domElement.createTag();
+domElement2.createTag();
