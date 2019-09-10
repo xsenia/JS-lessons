@@ -29,11 +29,7 @@ DomElement.prototype.createDiv = function() {
     let div = document.createElement('div');
     div.className = this.selector.slice(1);
     div.innerHTML = this.selector.slice(1) + ' <b>Был создан див.</b>';
-    document.body.append(div);
-    div.style.height = this.height;
-    div.style.width = this.width;
-    div.style.backgroundColor = this.bg;
-    div.style.fontSize = this.fontSize;
+    document.body.append(div);    
     div.style.cssText='height:' + this.height + 'px;background-color: ' + this.bg +';width:' + this.width + 'px;font-size:'+ this.fontSize +'px;';
 };
 
