@@ -16,7 +16,6 @@ let additionalExpensesItem =    document.querySelector('.additional_expenses-ite
 let depositCheck =              document.querySelector('#deposit-check');
 let depositAmount =             document.querySelector('.deposit-amount');
 let depositPercent =            document.querySelector('.deposit-percent');
-console.log('depositPercent: ', depositPercent);
 let targetAmount =              document.querySelector('.target-amount');
 let budgetMonthValue =          document.querySelector('.budget_month-value');
 let budgetDayValue =            document.querySelector('.budget_day-value');
@@ -140,23 +139,30 @@ AppData.prototype.showResult = function() {
     incomePeriodValue.value = this.calcPeriod();
 };
 
-AppData.prototype.addExpensesBlock = function() {        
-    let cloneExpensesItems = expensesItems[0].cloneNode(true);
-    expensesItems[0].parentNode.insertBefore(cloneExpensesItems, expensesPlus);
-    expensesItems = document.querySelectorAll('.expenses-items');
+// AppData.prototype.addExpensesBlock = function() {        
+//     let cloneExpensesItems = expensesItems[0].cloneNode(true);
+//     expensesItems[0].parentNode.insertBefore(cloneExpensesItems, expensesPlus);
 
-    if (expensesItems.length === 3) {
-        expensesPlus.style.display = 'none';
-    }
-};
+//     if (expensesItems.length === 3) {
+//         expensesPlus.style.display = 'none';
+//     }
+// };
 
-AppData.prototype.addIncomeBlock = function() {        
-    let cloneIncomeItems = incomeItems[0].cloneNode(true);
-    incomeItems[0].parentNode.insertBefore(cloneIncomeItems, incomePlus);
-    incomeItems = document.querySelectorAll('.income-items');
+// AppData.prototype.addIncomeBlock = function() {        
+//     let cloneIncomeItems = incomeItems[0].cloneNode(true);
+//     incomeItems[0].parentNode.insertBefore(cloneIncomeItems, incomePlus);
 
-    if (incomeItems.length === 3) {
-        incomePlus.style.display = 'none';
+//     if (incomeItems.length === 3) {
+//         incomePlus.style.display = 'none';
+//     }
+// };
+
+AppData.prototype.addBlock = function(btnPlus,items) {        
+    let cloneItems = items[0].cloneNode(true);
+    items[0].parentNode.insertBefore(cloneItems, btnPlus);
+
+    if (items.length === 3) { 
+        btnPlus.style.display = 'none';
     }
 };
 
@@ -220,13 +226,7 @@ AppData.prototype.getExpensesMonth = function() {
 };
 
 AppData.prototype.getBudget = function() {
-    this.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth + (this.moneyDeposit*this.persentDeposit)/12;
-    console.log('this.persentDeposit: ', this.persentDeposit);
-    console.log('this.moneyDeposit: ', this.moneyDeposit);
-    console.log('this.expensesMonth: ', this.expensesMonth);
-    console.log('this.incomeMonth: ', this.incomeMonth);
-    console.log('this.budget: ', this.budget);
-    console.log('this.budgetMonth: ', this.budgetMonth);
+    this.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth + (this.moneyDeposit*this.persentDeposit)/12;   
     this.budgetDay = Math.ceil(this.budgetMonth/30);
 };
 
@@ -262,9 +262,9 @@ AppData.prototype.eventListeners = function() {
     btnStart.addEventListener('click', this.start.bind(appData));
     btnCncel.addEventListener('click', this.reset.bind(appData));
 
+    expensesPlus.addEventListener('click', () => { this.addBlock(expensesPlus,expensesItems)});
+    incomePlus.addEventListener('click', () => {  this.addBlock(incomePlus,incomeItems)});
 
-    expensesPlus.addEventListener('click', this.addExpensesBlock);
-    incomePlus.addEventListener('click', this.addIncomeBlock);
     periodSelect.addEventListener('change', this.setPeriod);
     salaryAmount.addEventListener('keyup', this.enabled);
 };
