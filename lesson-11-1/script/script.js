@@ -12,7 +12,7 @@ let additionalIncomeTitle =     document.querySelector('.additional_income-title
 let expensesTitle =             document.querySelector('.expenses-title');
 let expensesItems =             document.querySelectorAll('.expenses-items');
 let additionalIncomeItem =      document.querySelectorAll('.additional_income-item');
-let additionalExpensesItem =    document.querySelector('.additional_expenses-item').value.split(',');
+let additionalExpensesItem =    document.querySelector('.additional_expenses-item');
 let depositCheck =              document.querySelector('#deposit-check');
 let depositAmount =             document.querySelector('.deposit-amount');
 let depositPercent =            document.querySelector('.deposit-percent');
@@ -74,24 +74,47 @@ AppData.prototype.start = function() {
 
     this.getExpenses();
     this.getIncome();
-    this.getExpensesMonth(); 
+    this.getExpensesMonth();        
+    // this.getAddExpenses();
+    // this.getAddIncome();
     this.getAddBudgetItem(additionalIncomeItem,this.addIncome);
-    this.getAddBudgetItem(additionalExpensesItem,this.addExpenses);
+    this.getAddBudgetItem(additionalExpensesItem.value.split(','),this.addExpenses);
     this.getInfoDeposit();     
     this.getBudget();
     this.showResult();
 };
 
 AppData.prototype.getAddBudgetItem = function(budgetArr,addBudget) {
-    const _this = this;
-    budgetArr.forEach(function(item){  
-        item = item.trim();
+    console.log('typeof budgetArr: ', typeof budgetArr);
+    console.log('budgetArr: ', budgetArr);
+    console.log('addBudget: ', addBudget);
+    budgetArr.forEach(function(item){  //получаем массив - document.querySelector('.additional_expenses-item').value.split(',');        
         if (item !== '') {
-            _this.addBudget.push(item); 
+            addBudget.push(item);  //этот массив по одному пушим в additionalExpensesValue.value = this.addExpenses.join(', ');
         }
     });
 };
 
+//nen
+// AppData.prototype.getAddExpenses = function() {
+//     const _this = this;
+//     additionalExpensesItem.forEach(function(item){  //получаем массив - document.querySelector('.additional_expenses-item').value.split(',');
+//         item = item.trim();
+//         if (item !== '') {
+//             _this.addExpenses.push(item);  //этот массив по одному пушим в additionalExpensesValue.value = this.addExpenses.join(', ');
+//         }
+//     });
+// };
+
+// AppData.prototype.getAddIncome = function() {
+//     const _this = this;
+//     additionalIncomeItem.forEach(function(item){  //получаем массив - document.querySelectorAll('.additional_income-item');
+//         item = item.value.trim();
+//         if (itemValue !== '') {
+//             _this.addIncome.push(itemValue); //этот массив по одному пушим в additionalIncomeValue.value = this.addIncome.join(', ');
+//         }
+//     });
+// };
 
 AppData.prototype.reset = function() {
     let dataInputs = document.querySelectorAll('.data input[type = text]'),
