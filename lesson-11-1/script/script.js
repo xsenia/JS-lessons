@@ -84,20 +84,21 @@ AppData.prototype.start = function() {
 
 AppData.prototype.getAddExpenses = function() {
     const _this = this;
-    additionalExpensesItem.forEach(function(item){  //получаем массив - document.querySelector('.additional_expenses-item').value.split(',');
+    let addExpenses = additionalExpensesItem.value.split(',');
+    addExpenses.forEach(function(item){
         item = item.trim();
         if (item !== '') {
-            _this.addExpenses.push(item);  //этот массив по одному пушим в additionalExpensesValue.value = this.addExpenses.join(', ');
+            _this.addExpenses.push(item);
         }
     });
 };
 
 AppData.prototype.getAddIncome = function() {
     const _this = this;
-    additionalIncomeItem.forEach(function(item){  //получаем массив - document.querySelectorAll('.additional_income-item');
-        item = item.value.trim();
+    additionalIncomeItem.forEach(function(item){
+        let itemValue = item.value.trim();
         if (itemValue !== '') {
-            _this.addIncome.push(itemValue); //этот массив по одному пушим в additionalIncomeValue.value = this.addIncome.join(', ');
+            _this.addIncome.push(itemValue);
         }
     });
 };
