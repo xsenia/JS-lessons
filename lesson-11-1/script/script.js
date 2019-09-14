@@ -162,9 +162,9 @@ AppData.prototype.showResult = function() {
 
 
 AppData.prototype.addBlock = function(btnPlus,items,classItems) {        
-    let cloneItems = items[0].cloneNode(true);
-    items = document.querySelectorAll(classItems);
+    let cloneItems = items[0].cloneNode(true);    
     items[0].parentNode.insertBefore(cloneItems, btnPlus);
+    items = document.querySelectorAll(classItems);
 
     if (items.length === 3) { 
         btnPlus.style.display = 'none';
