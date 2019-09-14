@@ -15,9 +15,8 @@ window.addEventListener('DOMContentLoaded', function() {
             timeRemainning = (dateStop - dateNow)/1000,
             seconds = Math.floor(timeRemainning % 60),
             minuts = Math.floor((timeRemainning / 60) % 60),
-            hours = Math.floor((timeRemainning / 60 / 60) % 24),            
-            day = Math.floor(timeRemainning / 60 / 60 / 24);           
-            
+            hours = Math.floor((timeRemainning / 60 / 60) % 24),
+            day = Math.floor(timeRemainning / 60 / 60 / 24); 
 
             if(hours < 10 && hours > 0 ) {
                 hours = '0' + hours;                
@@ -34,14 +33,11 @@ window.addEventListener('DOMContentLoaded', function() {
         }
 
         function updateClock () {
-            let timer = getTimeRemaining ();
+            let timer = getTimeRemaining();
             timerHours.textContent = timer.hours;
             timerminutes.textContent = timer.minuts;
-            timerseconds.textContent = timer.seconds;         
-            
-            if (timer.timeRemainning > 0) {
-                setTimeout(updateClock, 1000);
-            }
+            timerseconds.textContent = timer.seconds; 
+           
 
             if (timer.hours < 0) { 
                 timerBlock.style.color = "red";
@@ -54,7 +50,8 @@ window.addEventListener('DOMContentLoaded', function() {
         updateClock ();
 
     }
-
-    countTimer('17 september 2019');
+    
+    
+    setInterval(countTimer, 1000, '18 september 2019');
 
 });
