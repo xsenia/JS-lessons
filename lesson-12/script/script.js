@@ -15,16 +15,16 @@ window.addEventListener('DOMContentLoaded', function() {
             timeRemainning = (dateStop - dateNow)/1000,
             seconds = Math.floor(timeRemainning % 60),
             minuts = Math.floor((timeRemainning / 60) % 60),
-            hours = Math.floor((timeRemainning / 60 / 60) % 24),
+            hours = Math.floor(timeRemainning / 60 / 60),
             day = Math.floor(timeRemainning / 60 / 60 / 24); 
 
-            if(hours < 10 && hours > 0 ) {
+            if(hours < 10 && hours >= 0 ) {
                 hours = '0' + hours;                
             }
-            if(minuts < 10 && minuts > 0) {
+            if(minuts < 10 && minuts >= 0) {
                 minuts = '0' + minuts;
             }
-            if(seconds < 10 && seconds > 0) {
+            if(seconds < 10 && seconds >= 0) {
                 seconds = '0' + seconds;
             }
             
@@ -52,6 +52,6 @@ window.addEventListener('DOMContentLoaded', function() {
     }
     
     
-    setInterval(countTimer, 1000, '18 september 2019');
+    setInterval(countTimer, 1000, '19 september 2019');
 
 });
