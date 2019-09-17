@@ -61,22 +61,28 @@ window.addEventListener('DOMContentLoaded', function() {
 
     const toggleMenu = () => {
 
-        const btnMenu = document.querySelector('.menu');
-        const menu = document.querySelector('menu');
+        const btnMenu = document.querySelector('.menu'),
+            menu = document.querySelector('menu'),
+            body = document.querySelector('body');
+        
 
-        const handlerMenu = () => {
-            menu.classList.toggle('active-menu');
-        };
+        btnMenu.addEventListener('click', () => {
+            menu.classList.add('active-menu');
+        });
 
-        btnMenu.addEventListener('click', handlerMenu);
-
-        menu.addEventListener(('click'), (event) => {
+        body.addEventListener(('click'), (event) => {
             let target = event.target;
-            if(target.tagName !== 'MENU') {
-                if(target.tagName === 'A'){ 
-                    handlerMenu();
-                }                
+
+            if(target.closest('menu') && menu.classList.contains('active-menu')) { 
+                if(target.tagName !== 'MENU') {
+                    if(target.tagName === 'A'){ 
+                        menu.classList.remove('active-menu');
+                    }                
+                }
+            } else if (!target.closest('menu') && !target.closest('.menu')) {
+                menu.classList.remove('active-menu');
             }
+           
         });
 
     };
