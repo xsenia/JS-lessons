@@ -66,9 +66,9 @@ window.addEventListener('DOMContentLoaded', function() {
             body = document.querySelector('body');
         
 
-        btnMenu.addEventListener('click', () => {
-            menu.classList.add('active-menu');
-        });
+        // btnMenu.addEventListener('click', () => {
+        //     menu.classList.add('active-menu');
+        //});
 
         body.addEventListener(('click'), (event) => {
             let target = event.target;
@@ -81,6 +81,8 @@ window.addEventListener('DOMContentLoaded', function() {
                 }
             } else if (!target.closest('menu') && !target.closest('.menu')) {
                 menu.classList.remove('active-menu');
+            } if (target.closest('.menu')) {
+                menu.classList.toggle('active-menu');
             }
            
         });
