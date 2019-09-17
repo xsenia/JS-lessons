@@ -58,12 +58,11 @@ window.addEventListener('DOMContentLoaded', function() {
 
     //menu
 
+
     const toggleMenu = () => {
 
         const btnMenu = document.querySelector('.menu');
         const menu = document.querySelector('menu');
-        const closeBtn = document.querySelector('.close-btn');
-        const menuItems = document.querySelectorAll('ul>li');
 
         const handlerMenu = () => {
             menu.classList.toggle('active-menu');
@@ -71,13 +70,14 @@ window.addEventListener('DOMContentLoaded', function() {
 
         btnMenu.addEventListener('click', handlerMenu);
 
-        closeBtn.addEventListener('click', handlerMenu);        
-
-        menuItems.forEach((elem) => {
-            elem.addEventListener('click', handlerMenu);
+        menu.addEventListener(('click'), (event) => {
+            let target = event.target;
+            if(target.tagName !== 'MENU') {
+                if(target.tagName === 'A'){ 
+                    handlerMenu();
+                }                
+            }
         });
-
-
 
     };
 
@@ -130,7 +130,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
     const scrollToAnimate = () => {
 
-        let linkNav = document.querySelectorAll('[href^="#"]'),
+        let linkNav = document.querySelectorAll('menu ul li a'),
         V = 0.5;  // скорость, может иметь дробное значение через точку (чем меньше значение - тем больше скорость)
         
         for (var i = 0; i < linkNav.length; i++) {
