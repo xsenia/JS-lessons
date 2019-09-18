@@ -233,8 +233,21 @@ window.addEventListener('DOMContentLoaded', function() {
     const slider = () => {
         const slide = document.querySelectorAll('.portfolio-item'),
             btn = document.querySelectorAll('.portfolio-btn'),
-            dot = document.querySelectorAll('.dot'),
             slider = document.querySelector('.portfolio-content');
+
+        let dot = [];
+        let portfolioDots = document.createElement('ul');
+        
+        portfolioDots.classList.add('portfolio-dots');
+        slider.append(portfolioDots);
+        
+        for(let i=0; i<slide.length; i++) {
+            let dotOne = document.createElement('li');
+            dotOne.classList.add('dot');
+            dot[i] = dotOne;
+            portfolioDots.append(dotOne);
+        }
+
 
         let currentSlide = 0,
             interval;
@@ -244,8 +257,6 @@ window.addEventListener('DOMContentLoaded', function() {
         };
 
         const nextSlide = (elem, index, strClass) => {
-            console.log('index: ', index);
-            
             elem[index].classList.add(strClass);
         };
 

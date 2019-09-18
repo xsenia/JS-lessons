@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+
+    <title>Document</title>
+</head>
+<body>
+
+
+<script type="text/javascript" language="JavaScript"> 
+    function daysCounter() {  
+      let today = new Date();
+      //Можно установить любую дату 
+      let nextDate = new Date("September 14, 2019");
+      //Количество миллисекунд в одном дне 
+      let msPerDay = 24*60*60*1000; 
+      //Высчитываем количество дней 
+      //let daysLeft = Math.round( (nextDate.getTime() - today.getTime()) / msPerDay ); 
+
+      let daysLeft = Math.round( nextDate.getDate() - today.getDate() ); 
+      
+      let dayname = ""; 
+      let ds = ""+daysLeft; 
+      //Вырезаем последнею цифру 
+      let dd = parseInt(ds.substr(ds.length-1)); 
+      //Склоняем слово ДЕНЬ 
+      if(daysLeft>4&&daysLeft<21) dayname=" дней" 
+          else 
+              if(dd==1)dayname=" день" 
+                  else 
+                      if(dd==2||dd==3||dd==4) dayname=" дня" 
+                          else dayname=" дней" 
+      //Выводим надпись в документ 
+  if(daysLeft<0) {document.write("")} 
+      else { 
+          if(daysLeft==0) {document.write("")} else { 
+              document.write('До начала <span id="event-mess1">осталось </span><span class="digits"><span id="timetoevent">0'+daysLeft+'</span></span><span id="event-mess" class="days">'+dayname+'</span>')} 
+          } 
+      } 
+  </script>
+
+
+  <h2><script type="text/javascript" language="JavaScript">daysCounter()</script></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<script src="./script/oop.js"></script>-->
+<script src="./script/script.js"></script>
+</body>
+</html>
