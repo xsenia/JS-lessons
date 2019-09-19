@@ -464,20 +464,35 @@ window.addEventListener('DOMContentLoaded', function() {
     carousel.init();
 
 
-    const changeImg = () => {
-        const img = document.querySelectorAll('img');
 
-        
+    const changeImg = () => {
+        const img = document.querySelectorAll('#command img');
 
         img.forEach((elem) => {
-            elem.addEventListener('mousenter', (event) => {          
+            let imgSrc = elem.src;
+            elem.addEventListener('mouseenter', (event) => {
                 event.target.src = event.target.dataset.img;
-            })
+            });
+            elem.addEventListener('mouseout', (event) => { 
+                event.target.src = imgSrc;
+            });
         });
-
     }
 
     changeImg();
+
+    const validator = () => {
+        const input = document.querySelectorAll('.calc-block input');
+        input.forEach((elem) => {
+            elem.setAttribute('type', 'text');
+            elem.addEventListener('input', () => {
+                elem.value = elem.value.replace(/\D/g, '');
+            });
+        });
+        
+    }
+
+    validator();
 
 
 
