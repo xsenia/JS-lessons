@@ -481,6 +481,8 @@ window.addEventListener('DOMContentLoaded', function() {
 
     changeImg();
 
+    //Валидатор ввода цифр
+
     const validator = () => {
         const input = document.querySelectorAll('.calc-block input');
         input.forEach((elem) => {
@@ -488,11 +490,35 @@ window.addEventListener('DOMContentLoaded', function() {
             elem.addEventListener('input', () => {
                 elem.value = elem.value.replace(/\D/g, '');
             });
-        });
-        
-    }
-
+        });        
+    };
     validator();
+
+    //Валидатор ввода телефона
+
+    const phoneValidator = () => {
+        const input = document.querySelectorAll('.form-phone');
+        input.forEach((elem) => {
+            elem.addEventListener('input', () => {
+                elem.value = elem.value.replace(/[^0-9+]/, '');
+            });
+        });        
+    };
+    phoneValidator();
+
+    //Валидатор ввода кириллицы
+
+    const textValidator = () => {
+        const input = document.querySelectorAll('.form-name, .mess');
+        console.log('input: ', input);
+
+        input.forEach((elem) => {
+            elem.addEventListener('input', () => {
+                elem.value = elem.value.replace(/[a-z\d]/g, '');
+            });
+        });        
+    };
+    textValidator();
 
 
     //calculator
@@ -550,16 +576,16 @@ window.addEventListener('DOMContentLoaded', function() {
 
     //Send ajax form
 
-    const sendForm = () => {
+    const sendForm = (formId) => {
         const errorMessage = "Что то пошло не так",
         loadMessage = 'Загрузка...',
         successMessage = 'Спасибо, мы свяжемся с вами!';
 
-        const form = document.getElementById('form1');
+        const form = document.getElementById(formId);
 
         const statusMessage = document.createElement('div');
         statusMessage.textContent = 'Тут будет сообщение';
-        statusMessage.style.cssText = 'font-size: 30px;';
+        statusMessage.style.cssText = 'font-size: 30px;color:#19b5fe;';
 
         form.addEventListener('submit', (event) => {
             event.preventDefault();
@@ -571,8 +597,9 @@ window.addEventListener('DOMContentLoaded', function() {
             //     body[val[0]] = val[1];
             // } или
             formData.forEach((val,key) => {
-                body[key] = val;
+                body[key] = val;                
             });  
+
             
             postData(body, 
                 () => {
@@ -584,24 +611,22 @@ window.addEventListener('DOMContentLoaded', function() {
                 }
             );
 
+            resetForm(formId);
+
         });
+        
 
         const postData = (body, outputData, errorData) => {
             const request = new XMLHttpRequest();
 
-            request.addEventListener('readystatechange', () => {
-                
-                
+            request.addEventListener('readystatechange', () => {  
                 if(request.readyState !== 4) {
-                    return;
-                }
+                    return;                }
     
                 if(request.status === 200) {
-                    outputData();
-                    
+                    outputData();                    
                 } else {
-                    errorData(request.status);
-                    
+                    errorData(request.status);                    
                 }
             });
 
@@ -613,9 +638,19 @@ window.addEventListener('DOMContentLoaded', function() {
             request.send(JSON.stringify(body));
         };
 
+        const resetForm = (formId) => {
+            let form = document.getElementById(formId);            
+            let dataInputs = form.querySelectorAll('input');
+            dataInputs.forEach((input) => {
+                input.value = '';                   
+            });  
+        };
+
     };
 
-    sendForm();
+    sendForm('form1');
+    sendForm('form2');
+    sendForm('form3');
 
 
 
